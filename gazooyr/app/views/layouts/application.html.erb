@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gazooyr</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default">
+            <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"> Gazooyr </a>
+        <a class="navbar" href="#">You're on Gazooyr !</a>
+        <a class="navbar" href="#">Tendances</a>
+        <a class="navbar" href="#">Les derniers gazooies</a>
+        <a class="navbar" href="#">Le twitter qu'il est vachement plus mieux</a>
+      </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse container">
+        <ul class="nav navbar-nav navbar-right">
+            <!-- <li><a href="#">Login</a></li> -->
+            <% if user_signed_in? %>
+              <li><%= link_to "Déconnection", destroy_user_session_path, :method => :delete, id: 'logout' %> </li>
+              <li>
+                <div class="dropdown show">
+                  <a class="btn btn-secondary dropdown-toggle" id="account-dropdown" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    account
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <ul>
+                      <li><%= link_to "Mon Compte", edit_user_registration_path  %></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <% else %>
+              <li><%= link_to "Sign In", new_user_session_path %></li>
+              <li><%= link_to "Sign Up", new_user_registration_path%></li>
+            <% end %>
+          </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
+    <%= yield %>
+
+
+
+
+  </body>
+</html>
